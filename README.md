@@ -4,7 +4,7 @@
 [![license: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
->A script running browser test of specified urls trough GTmetrix and saving metrics in BigQuery.
+>A script running browser test of specified urls through GTmetrix and saving metrics in BigQuery.
 
 ## Project Status
 
