@@ -1,0 +1,5 @@
+bq:
+  dataset: 'gtmetrix'
+  table: 'test'
+urls:
+  - https://google.com/

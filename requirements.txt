@@ -1,0 +1,2 @@
+google-cloud-bigquery==1.24.0
+git+git://github.com/aisayko/python-gtmetrix.git@a7255b63294b3adfc1fbdd640f37dedb9611e6c9
