@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from datetime import datetime
 from yaml import load, BaseLoader
 from gtmetrix import GTmetrixInterface
