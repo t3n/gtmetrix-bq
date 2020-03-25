@@ -30,6 +30,7 @@ def bq_create_table(dataset, table):
         schema = [
             bigquery.SchemaField('timestamp', 'DATETIME', mode='REQUIRED'),
             bigquery.SchemaField('url', 'STRING', mode='REQUIRED'),
+            bigquery.SchemaField('adblock', 'BOOLEAN', mode='REQUIRED'),
             bigquery.SchemaField('onload_time', 'INTEGER', mode='REQUIRED'),
             bigquery.SchemaField('first_contentful_paint_time', 'INTEGER', mode='REQUIRED'),
             bigquery.SchemaField('page_elements', 'INTEGER', mode='REQUIRED'),
@@ -81,13 +82,19 @@ if __name__ == '__main__':
     gt = GTmetrixInterface()
 
     for url in config['urls']:
-        test = gt.start_test(url)
-        results = test.fetch_results('results')['results']
-        results['url'] = url
-        results['timestamp'] = datetime.utcnow()
+        for options in [{}, {'x-metrix-adblock': 1}]:
+            test = gt.start_test(url, **options)
+            results = test.fetch_results('results')['results']
+            results['url'] = url
+            results['timestamp'] = datetime.utcnow()
 
-        for k, v in results.items():
-            if v is None:
-                results[k] = 0
+            if not bool(options):
+                results['adblock'] = False
+            else:
+                results['adblock'] = True
 
-        bq_insert_rows(dataset_id, table_id, [results])
+            for k, v in results.items():
+                if v is None:
+                    results[k] = 0
+
+            bq_insert_rows(dataset_id, table_id, [results])
