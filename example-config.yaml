@@ -1,5 +1,9 @@
 bq:
   dataset: 'gtmetrix'
   table: 'test'
-urls:
-  - https://google.com/
+tests:
+  - url: https://google.com/
+    options:
+      x-metrix-adblock: 1
+  - url: https:/google.com/
+    options: {}

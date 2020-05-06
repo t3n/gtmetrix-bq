@@ -22,7 +22,17 @@ Alpha, everything is subject to change.
 
 ## Install
 
+```bash
+$ docker pull t3nde/gtmetrix-bq
+```
+
 ## Usage
+
+```bash
+# copy example config and edit
+$ cp example-config.yaml config.yaml; vim config.yaml
+$ docker run t3nde/gtmetrix-bq -v ${PWD}/config.yaml:/app/config.yaml --env GTMETRIX_REST_API_EMAIL=<email> --env GTMETRIX_REST_API_KEY=<key> t3nde/gtmetrix-bq
+```
 
 ## Contributing
 
