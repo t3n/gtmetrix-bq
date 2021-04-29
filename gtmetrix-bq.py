@@ -94,12 +94,16 @@ if __name__ == "__main__":
         )
         gt_test = gt.start_test(test["url"], **test["options"])
         results = gt_test.fetch_results("results")["results"]
-        results["url"] = test["url"]
-        results["timestamp"] = datetime.utcnow()
-        results["options"] = json.dumps(test["options"])
+        if result:
+            results["url"] = test["url"]
+            results["timestamp"] = datetime.utcnow()
+            results["options"] = json.dumps(test["options"])
 
-        for k, v in results.items():
-            if v is None:
-                results[k] = 0
+            for k, v in results.items():
+                if v is None:
+                    results[k] = 0
 
-        bq_insert_rows(dataset_id, table_id, [results])
+            bq_insert_rows(dataset_id, table_id, [results])
+        else:
+            print('GtMetrix scan failure for URL: %s' % test["url"])
+            
